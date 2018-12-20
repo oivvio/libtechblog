@@ -1,0 +1,15 @@
+div.site-name a {
+    font-weight: bold;
+}
+
+footer .author__logo img {
+    border-radius: 50%;
+}
+
+body {
+    font-size: 18px;
+}
+
+header .site-name {
+    font-size: 3rem;
+}

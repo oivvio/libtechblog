@@ -1,0 +1,41 @@
+.post-header-index {
+    padding: 0px;
+    padding-top: 50px;
+    border: 0px;
+}
+.post-stub a:hover {
+    padding: 20px 5px;
+    cursor: pointer;
+}
+.blog-description:after, .post-date:after {
+    border: 0px;
+    margin: 0px;
+}
+.page-title, .post-title {
+    padding-top: 30px;
+}
+.container {
+    margin: 0 auto;
+    position: relative;
+    max-width: 760px;
+    padding: 0 24px;
+    width: auto;
+}
+.post-content a:hover {
+    padding: 0px;
+}
+.post-stub-date:before {
+    content: "";
+}
+.post-list {
+    padding-top: 0px;
+}
+.post-header {
+    padding-top: 50px;
+}
+.footer-copyright {
+    text-transform: none;
+}
+.footer {
+    padding-bottom: 40px;
+}
