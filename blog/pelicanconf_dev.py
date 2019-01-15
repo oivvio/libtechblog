@@ -1,0 +1,1 @@
+from pelicanconf import *

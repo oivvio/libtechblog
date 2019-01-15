@@ -1,0 +1,51 @@
+@mixin mobile() {
+  @media only screen and (max-width: 480px) {
+    @content;
+  }
+}
+
+body {
+  @include mobile {
+    font-size: 20px;
+  }
+}
+
+.site-title {
+  a {
+    margin-right: 10px;
+  }
+}
+.site-name {
+  font-size: 52px;
+  font-weight: 700;
+  margin: 15px 0;
+  text-align: center;
+
+  margin-right: 8px;
+
+  @include mobile {
+    font-size: 2rem;
+  }
+}
+
+.site-hello {
+  text-transform: none;
+  @include mobile {
+    font-size: 1.5rem;
+  }
+}
+
+.post-title {
+  margin-right: 8px;
+}
+
+.hide-on-mobile {
+  @include mobile {
+    display: none;
+  }
+}
+
+code,
+pre {
+  font-size: 0.9rem;
+}

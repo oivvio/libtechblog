@@ -13,8 +13,9 @@ CONFIG = {
     # Local path configuration (can be absolute or relative to tasks.py)
     "deploy_path": "output",
     # Remote server configuration
-    "production": "oivvio@collins.liberationtech.net:2224",
-    "dest_path": "/home/oivvio/sites/libtechblog",
+    "production": "oivvio@collins.liberationtech.net",
+    "production_port": "2224",
+    "dest_path": "/home/oivvio/sites/libtechstatic/www",
     # Port for `serve`
     "port": 9002,
 }
@@ -29,26 +30,43 @@ def clean(c):
 
 
 @task
-def build(c):
+def build(c, relative_urls=False):
     """Build local version of site"""
-    c.run("pelican -s pelicanconf.py")
+    relative_urls = " --relative-urls " if relative_urls else " "
+    c.run(f"pelican -s pelicanconf.py {relative_urls}")
 
 
 @task
-def rebuild(c):
+def rebuild(c, relative_urls=False):
     """`build` with the delete switch"""
-    c.run("pelican -d -s pelicanconf.py")
+    relative_urls = " --relative-urls " if relative_urls else " "
+    c.run(f"pelican -d -s pelicanconf.py {relative_urls}")
 
 
 @task
-def regenerate(c):
+def regenerate(c, relative_urls=False):
     """Automatically regenerate site upon file modification"""
-    c.run("pelican -r -s pelicanconf.py")
+    relative_urls = " --relative-urls " if relative_urls else " "
+    c.run("pelican -r -s pelicanconf.py {relative_urls}")
+
+
+@task
+def watch_and_serve(c, relative_urls=True):
+    """Watch content for changes and serve on PORT """
+    relative_urls = " --relative-urls " if relative_urls else " "
+
+    cmd = f"pelican -s pelicanconf.py {relative_urls}"
+    print(cmd)
+    c.run(cmd, pty=True)
+
+    cmd = f"pelican --autoreload -s pelicanconf.py {relative_urls} --listen --port {CONFIG['port']} --bind '0.0.0.0'"
+    print(cmd)
+    c.run(cmd, pty=True)
 
 
 @task
 def serve(c):
-    """Serve site at http://localhost:8000/"""
+    """Serve site at http://localhost:port/"""
 
     class AddressReuseTCPServer(RootedHTTPServer):
         allow_reuse_address = True
@@ -77,23 +95,28 @@ def preview(c):
 @task
 def publish(c):
     """Publish to production via rsync"""
+
     c.run("pelican -s publishconf.py")
-    c.run(
-        'rsync --delete --exclude ".DS_Store" -pthrvz -c '
-        "{} {production}:{dest_path}".format(
+
+    cmd = (
+        "rsync --delete -pthrvz -c "
+        "{} -e 'ssh -p {production_port}' {production}:{dest_path}".format(
             CONFIG["deploy_path"].rstrip("/") + "/", **CONFIG
         )
     )
 
+    print(cmd)
+    c.run(cmd)
+
 
 @task
 def update_theme(ctx, watch=False):
-    """Run this after editing the sass/html in ./themes/pelican-ghostwriter"""
-
-    # Run sass
-    cmd = "sass ../themes/pelican-ghostwriter/sass/main.scss   > ../themes/pelican-ghostwriter/static/css/main.css"
-    ctx.run(cmd)
+    """Run this after editing the sass/html in ../themes/pelican-ghostwriter"""
 
     # Reinstall theme
     cmd = "pelican-themes --upgrade ../themes/pelican-ghostwriter"
+    ctx.run(cmd)
+
+    # Run sass
+    cmd = "sass ../themes/pelican-ghostwriter/sass/main.scss   > ../themes/pelican-ghostwriter/static/css/main.css"
     ctx.run(cmd)
