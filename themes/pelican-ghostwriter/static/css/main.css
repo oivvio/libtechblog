@@ -285,6 +285,7 @@ table {
 .post-content a:hover {
   border-bottom: 1px dotted #f03838;
   padding: 0 0 2px; }
+
 .post-content:last-child {
   margin-bottom: 0; }
 
@@ -500,48 +501,38 @@ table {
 @media only screen and (max-width: 800px) {
   .post-stub-tag {
     display: none; } }
+
 @media only screen and (max-width: 600px) {
   h1,
   h2 {
     margin-bottom: 20px; }
-
   p {
     margin-bottom: 20px; }
-
   ul,
   ol {
     margin-bottom: 20px; }
-
   img {
     margin: 30px 0; }
-
   blockquote {
     margin: 30px 0; }
-
   pre {
     margin: 30px 0; }
-
   hr {
     margin: 35px 0; }
-
   .site-header {
     padding-top: 60px; }
-
   .site-nav-item {
     display: block;
     margin: 15px 0; }
-
   .post-header {
     margin-bottom: 35px;
     padding-bottom: 45px; }
-
   .post-title,
   .page-title,
   .author-name,
   .author-heading {
     font-size: 42px;
     margin-top: 5px; }
-
   .post-date,
   .blog-description,
   .author-meta {
@@ -552,58 +543,47 @@ table {
     .author-meta:after,
     .author-meta:before {
       margin-top: 30px; }
-
   .author-profile:after, .author-profile:before {
     margin-top: 20px; }
-
   .post-stub-title {
     display: block; }
-
   .post-stub-date:before {
     content: "";
     display: block; }
-
   .post-list {
     margin-top: 45px; }
-
   .post-container,
   .post-list,
   .author-profile {
     margin-right: 25px;
     margin-left: 25px; }
-
   .post-tags {
     width: 100%; }
-
   .post-stub a,
   .post-stub a:hover {
     padding-top: 12px;
     padding-bottom: 12px; }
-
   .share {
     float: left;
     margin-top: 20px; }
     .share a {
       margin: 0 5px 0 0; }
-
   .footer {
     margin-top: 50px; } }
+
 @media only screen and (max-width: 400px) {
   .site-header {
     padding-top: 40px; }
-
   .post-title,
   .page-title,
   .author-name,
   .author-heading {
     font-size: 30px;
     line-height: 1.2; }
-
   .post-date,
   .blog-description,
   .author-meta {
     line-height: 1.6; }
-
   .post-date,
   .blog-description,
   .author-meta {
@@ -614,26 +594,22 @@ table {
     .author-meta:after,
     .author-meta:before {
       margin-top: 20px; }
-
   .author-profile:after, .author-profile:before {
     margin-top: 10px; }
-
   .post-container,
   .post-list,
   .author-profile {
     margin-right: 15px;
     margin-left: 15px; }
-
   .author-avatar {
     display: block;
     margin: 0 auto 18px; }
-
   .author-meta span {
     display: block;
     margin: 18px 0; }
-
   .footer-copyright {
     padding: 0 10px; } }
+
 blockquote {
   border: 1px solid #dddbcc;
   border-radius: 3px;
@@ -722,13 +698,11 @@ body {
   @media only screen and (max-width: 480px) {
     .site-name {
       font-size: 2rem; } }
-
 .site-hello {
   text-transform: none; }
   @media only screen and (max-width: 480px) {
     .site-hello {
       font-size: 1.5rem; } }
-
 .post-title {
   margin-right: 8px; }
 

@@ -118,5 +118,5 @@ def update_theme(ctx, watch=False):
     ctx.run(cmd)
 
     # Run sass
-    cmd = "sass ../themes/pelican-ghostwriter/sass/main.scss   > ../themes/pelican-ghostwriter/static/css/main.css"
+    cmd = "sassc ../themes/pelican-ghostwriter/sass/main.scss   > ../themes/pelican-ghostwriter/static/css/main.css"
     ctx.run(cmd)
