@@ -7,6 +7,12 @@
 body {
   @include mobile {
     font-size: 20px;
+
+    id#wrapper {
+      margin-left: 1rem;
+      margin-right: 1rem;
+      background-color: pink;
+    }
   }
 }
 

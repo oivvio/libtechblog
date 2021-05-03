@@ -47,13 +47,28 @@ DEFAULT_PAGINATION = 10
 # THEME = "pelican-hss"
 # devrandom monospace
 # THEME = "simple"
-THEME = "pelican-ghostwriter"
+#
+#
+# THEME = "pelican-ghostwriter"
+
+HOME_COLOR = "black"
+
+# HOME_COVER = "https://casper.ghost.org/v1.0.0/images/welcome.jpg"
+
+STATIC_PATHS = ["extra", "images"]
+
+# installed in venv with `pelican-themes`
+THEME = "attila"
+CSS_OVERRIDE = ["extra/custom.css"]
+
 
 TAGLINE = "A proper blog"
 
-# set custom.css url.
-# CUSTOM_CSS_URL = "/static/custom.css"
-# STATIC_PATHS = ["extra", "images"]
+PLUGINS = ["jinja2content"]
+
+IGNORE_FILES = ["snippets"]
+JINJA2CONTENT_TEMPLATES = ["snippets"]
+
 # EXTRA_PATH_METADATA = {
 #    "extra/custom.css": {"path": "static/custom.css"},
 #    "images/selfie.jpg": {"path": "static/selfie.jpg"},

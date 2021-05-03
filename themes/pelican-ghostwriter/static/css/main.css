@@ -684,7 +684,11 @@ body {
 
 @media only screen and (max-width: 480px) {
   body {
-    font-size: 20px; } }
+    font-size: 20px; }
+    body id#wrapper {
+      margin-left: 1rem;
+      margin-right: 1rem;
+      background-color: pink; } }
 
 .site-title a {
   margin-right: 10px; }
