@@ -4,10 +4,16 @@ import os
 import shutil
 import sys
 import datetime
+from pathlib import Path
+from pathlib import PurePath
+import yaml
+import textwrap
 
 from invoke import task
 from invoke.util import cd
 from pelican.server import ComplexHTTPRequestHandler, RootedHTTPServer
+
+from PIL import Image, ImageDraw, ImageFont
 
 CONFIG = {
     # Local path configuration (can be absolute or relative to tasks.py)
@@ -19,6 +25,14 @@ CONFIG = {
     # Port for `serve`
     "port": 9002,
 }
+
+
+def preflight_check():
+    if not (Path("tasks.py").exists() and Path("pelicanconf.py").exists()):
+        print("Please run tasks from the root project folder")
+        exit()
+
+    print()
 
 
 @task
@@ -120,3 +134,94 @@ def update_theme(ctx, watch=False):
     # Run sass
     cmd = "sassc ../themes/pelican-ghostwriter/sass/main.scss   > ../themes/pelican-ghostwriter/static/css/main.css"
     ctx.run(cmd)
+
+
+def make_presentation_poster(path, fontpath):
+
+    IMAGE_WIDTH = 1920
+    IMAGE_HEIGHT = 1080
+
+    FONT_SIZE_TITLE = int(IMAGE_HEIGHT * 0.1)
+    FONT_SIZE_BODY = int(IMAGE_HEIGHT * 0.05)
+    LINE_HEIGHT_BODY = FONT_SIZE_BODY * 1.2
+    PADDING_SIDE = IMAGE_WIDTH * 0.05
+    PADDING_TOP = IMAGE_WIDTH * 0.03
+
+    base = path.name
+    imagepath = path.joinpath("image.png")
+    textpath = path.joinpath("text.yml")
+
+    output = path.joinpath("cover.png")
+
+    assert imagepath.exists()
+    assert textpath.exists()
+
+    with open(textpath) as file:
+        # The FullLoader parameter handles the conversion from YAML
+        # scalar values to Python the dictionary format
+        data = yaml.load(file, Loader=yaml.FullLoader)
+    print(data["title"])
+    print(data["body"])
+
+    # original layer
+    original = Image.open(imagepath)
+    size = (IMAGE_WIDTH, IMAGE_HEIGHT)
+    original = original.resize(size, resample=Image.LANCZOS)
+    original = original.convert("RGBA")
+
+    # middle  layer
+    middle = Image.new("RGBA", (IMAGE_WIDTH, IMAGE_HEIGHT), "BLACK")
+
+    # blend them
+    image = Image.blend(original, middle, 0.7)
+
+    # convert back to RGB
+    image = image.convert("RGB")
+    draw = ImageDraw.Draw(image)
+
+    # draw title
+    font = ImageFont.truetype(fontpath.as_posix(), FONT_SIZE_TITLE)
+    draw.text(
+        # (MARGIN, MARGIN - top_offset + i * line_height),
+        (PADDING_SIDE, PADDING_TOP),
+        data["title"],
+        font=font,
+        fill="WHITE",
+    )
+
+    # draw body
+    font = ImageFont.truetype(fontpath.as_posix(), FONT_SIZE_BODY)
+    lines = textwrap.wrap(data["body"], 30)
+    for index, line in enumerate(lines, start=1):
+        BODY_PADDING_TOP = PADDING_TOP + FONT_SIZE_TITLE + (LINE_HEIGHT_BODY * index)
+        draw.text(
+            (PADDING_SIDE, BODY_PADDING_TOP),
+            line,
+            font=font,
+            fill="WHITE",
+        )
+
+    # Save image
+    image.save(
+        open(output, "wb"),
+        "PNG",
+        optimize=True,
+        # quality=settings.ARTWORK_QUALITY,
+        progressive=True,
+    )
+
+
+#
+
+
+@task
+def make_video_posters(ctx):
+    """ Generate the video posters """
+    preflight_check()
+    fontpath = Path("content/extra/FiraSans-Bold.ttf")
+    assert fontpath.exists()
+
+    path = Path("content/videoposters")
+
+    for child in path.iterdir():
+        make_presentation_poster(child, fontpath)

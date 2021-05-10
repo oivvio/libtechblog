@@ -55,7 +55,7 @@ HOME_COLOR = "black"
 
 # HOME_COVER = "https://casper.ghost.org/v1.0.0/images/welcome.jpg"
 
-STATIC_PATHS = ["extra", "images"]
+STATIC_PATHS = ["extra", "images", "videoposters"]
 
 # installed in venv with `pelican-themes`
 THEME = "attila"

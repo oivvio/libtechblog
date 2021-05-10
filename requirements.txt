@@ -2,3 +2,5 @@ pelican
 markdown
 invoke
 pelican-jinja2content
+pyyaml
+Pillow

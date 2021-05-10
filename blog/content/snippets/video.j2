@@ -1,5 +1,10 @@
+<script>
+  window.addEventListener("load", function() {
+  const {{posterSlug}} = new Plyr('#{{posterSlug}}');
+  },true);
+</script>
 
-<video  poster="{{poster}}" width="250">
-  <source src="{{mp4}}"  type="video/mp4">
+<video id="{{posterSlug}}" controls disablePictureInPicture  poster="/videoposters/{{posterSlug}}/cover.png">
+  <source src="https://libtechblogstaticresources.s3.eu-north-1.amazonaws.com/{{posterSlug}}.mp4" type="video/mp4">
       Sorry, your browser doesn't support embedded videos.
 </video>
