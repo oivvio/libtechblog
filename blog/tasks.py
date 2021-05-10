@@ -151,7 +151,7 @@ def make_presentation_poster(path, fontpath):
     imagepath = path.joinpath("image.png")
     textpath = path.joinpath("text.yml")
 
-    output = path.joinpath("cover.png")
+    output = path.joinpath("cover.jpg")
 
     assert imagepath.exists()
     assert textpath.exists()
@@ -204,9 +204,9 @@ def make_presentation_poster(path, fontpath):
     # Save image
     image.save(
         open(output, "wb"),
-        "PNG",
+        "JPEG",
         optimize=True,
-        # quality=settings.ARTWORK_QUALITY,
+        quality=85,
         progressive=True,
     )
 
