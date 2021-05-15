@@ -138,8 +138,10 @@ def update_theme(ctx, watch=False):
 
 def make_presentation_poster(path, fontpath):
 
-    IMAGE_WIDTH = 1920
-    IMAGE_HEIGHT = 1080
+    # IMAGE_WIDTH = 1920
+    IMAGE_WIDTH = 1600
+    # IMAGE_HEIGHT = 1080
+    IMAGE_HEIGHT = 900
 
     FONT_SIZE_TITLE = int(IMAGE_HEIGHT * 0.1)
     FONT_SIZE_BODY = int(IMAGE_HEIGHT * 0.05)
@@ -192,7 +194,7 @@ def make_presentation_poster(path, fontpath):
     # draw body
     font = ImageFont.truetype(fontpath.as_posix(), FONT_SIZE_BODY)
     lines = textwrap.wrap(data["body"], 30)
-    for index, line in enumerate(lines, start=1):
+    for index, line in enumerate(lines, start=0):
         BODY_PADDING_TOP = PADDING_TOP + FONT_SIZE_TITLE + (LINE_HEIGHT_BODY * index)
         draw.text(
             (PADDING_SIDE, BODY_PADDING_TOP),
@@ -206,7 +208,7 @@ def make_presentation_poster(path, fontpath):
         open(output, "wb"),
         "JPEG",
         optimize=True,
-        quality=85,
+        quality=75,
         progressive=True,
     )
 

@@ -54,6 +54,7 @@ DEFAULT_PAGINATION = 10
 HOME_COLOR = "black"
 
 # HOME_COVER = "https://casper.ghost.org/v1.0.0/images/welcome.jpg"
+HOME_COVER = "/images/darkivy.jpg"
 
 STATIC_PATHS = ["extra", "images", "videoposters"]
 

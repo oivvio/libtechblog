@@ -7,3 +7,37 @@
 video {
   width: 100%;
 }
+
+div#codersranksummary {
+  display: flex;
+  flex-direction: row;
+
+  width: 400px;
+  height: 183px;
+}
+
+div#codersranksummary img {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+div#codersrankgraph {
+  width: 90%;
+  height: auto;
+}
+
+div#codersrankgraph img {
+  margin: 0;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+  div#codersranksummary {
+    display: block;
+    width: 90%;
+  }
+
+  div#codersrankgraph {
+    width: 90%;
+  }
+}
