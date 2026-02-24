@@ -70,9 +70,10 @@ PLUGINS = ["jinja2content"]
 IGNORE_FILES = ["snippets"]
 JINJA2CONTENT_TEMPLATES = ["snippets"]
 
-# EXTRA_PATH_METADATA = {
-#    "extra/custom.css": {"path": "static/custom.css"},
-#    "images/selfie.jpg": {"path": "static/selfie.jpg"},
-# }
+EXTRA_PATH_METADATA = {
+    "extra/custom.css": {"path": "static/custom.css"},
+    "images/selfie.jpg": {"path": "static/selfie.jpg"},
+    "extra/CNAME": {"path": "CNAME"},
+}
 
 # USER_LOGO_URL = "/static/selfie.jpg"
