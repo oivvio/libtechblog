@@ -18,6 +18,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Workflow started
+        run: |
+          echo "::notice::Deploy workflow started"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Event: ${{ github.event_name }}"
+          echo "Actor: ${{ github.actor }}"
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -27,10 +34,15 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          echo "::notice::Dependencies installed"
 
       - name: Build Pelican site
-        run: make publish
+        run: |
+          make publish
+          echo "::notice::Pelican build complete"
+          ls -la output/
         working-directory: blog
 
       - name: Upload artifact
@@ -45,3 +57,5 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
+      - name: Deploy complete
+        run: echo "::notice::Deployment finished"
