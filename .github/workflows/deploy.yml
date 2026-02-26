@@ -38,6 +38,11 @@ jobs:
           pip install -r requirements.txt
           echo "::notice::Dependencies installed"
 
+      - name: Install Attila theme
+        run: |
+          git clone --depth 1 https://github.com/arulrajnet/attila.git /tmp/attila
+          pelican-themes -i /tmp/attila
+
       - name: Build Pelican site
         run: |
           make publish
