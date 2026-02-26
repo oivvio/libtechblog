@@ -12,6 +12,22 @@ ARTICLE_SAVE_AS = "{slug}/index.html"
 PAGE_URL = "pages/{slug}"
 PAGE_SAVE_AS = "pages/{slug}/index.html"
 
+# Required by Attila theme
+CATEGORY_URL = "category/{slug}/"
+CATEGORY_SAVE_AS = "category/{slug}/index.html"
+CATEGORIES_URL = "category/"
+CATEGORIES_SAVE_AS = "category/index.html"
+TAG_URL = "tag/{slug}/"
+TAG_SAVE_AS = "tag/{slug}/index.html"
+TAGS_URL = "tag/"
+TAGS_SAVE_AS = "tag/index.html"
+AUTHOR_URL = "author/{slug}/"
+AUTHOR_SAVE_AS = "author/{slug}/index.html"
+AUTHORS_URL = "author/"
+AUTHORS_SAVE_AS = "author/index.html"
+ARCHIVES_URL = "archive/"
+ARCHIVES_SAVE_AS = "archive/index.html"
+
 PATH = "content"
 
 TIMEZONE = "Europe/Stockholm"
