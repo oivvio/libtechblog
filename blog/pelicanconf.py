@@ -76,7 +76,7 @@ STATIC_PATHS = ["extra", "images", "videoposters"]
 
 # installed in venv with `pelican-themes`
 THEME = "attila"
-CSS_OVERRIDE = ["extra/custom.css"]
+CSS_OVERRIDE = ["static/custom.css"]
 
 
 TAGLINE = "A proper blog"
